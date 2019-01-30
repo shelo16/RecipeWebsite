@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Recipe</title>
+    <script type="text/javascript" th:src="@{/js/AddIngredient.js}" ></script>
+</head>
+<body>
+    <form action = "#" th:action="@{/postEditMenu}" th:object="${newMenu}" method="post">
+        <input type="text" th:field = "*{id}" hidden>
+        <p>Menu Name: <br><input type="text" th:field="*{name}"></p>
+        <div id="wrapper" th:each="ing: ${ingredients}">
+            <label for="ingredientName"></label>
+            <input type="text" th:value = "${ing.id}" hidden>
+            <p>Ingredient Name: <br><input th:value="${ing.ingredientName}" id="ingredientName" type="text" name="ingName"></p>
+
+            <label for="ingredientDescription"></label>
+            <input type="text" th:value = "${ing.id}" hidden>
+            <p>Ingredient Description:</p> <textarea id="ingredientDescription" type="text" th:text="${ing.ingredientDescription}" name="ingDesc"></textarea>
+        </div>
+        <br>
+
+        <input type="button" id="more_fields" onclick="add_fields();" value="Add More" />
+        <br>
+
+        <input type="submit" th:value="Submit">
+
+    </form>
+</body>
+</html>

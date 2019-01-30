@@ -1,0 +1,12 @@
+.content{
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+  text-align = center;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: none;
+    font-weight: none;
+    }

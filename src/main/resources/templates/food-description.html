@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Page</title>
+    <link th:href="@{/css/description.css}" rel="stylesheet" />
+</head>
+<body>
+
+    <div th:object="${menu}" class="content">
+        <a th:href="@{/recipeList}">Go Back To List</a>
+        <h1 th:text = "${menu.name}" class="menuName">Menu Name</h1>
+        <div th:each="ing : ${menu.ingredient}" class="listItems">
+            <ul>
+                <li th:text = "${ing.ingredientName}">Food Description</li>
+                    <ul>
+                        <li th:text="${ing.ingredientDescription}"></li>
+                    </ul>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

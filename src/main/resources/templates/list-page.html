@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Page</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+    <a th:href="@{/addNew}">Add New Recipe</a>
+
+    <a th:href="@{/logout}">logout</a>
+
+    <div th:each="menu : ${menuList}">
+        <div class="content">
+            <div class="inside-box">
+                <h1 th:text="${menu.name}" class="menu-name">Menu Name</h1>
+                <a th:href="@{/foodDescription/{myMenuId}(myMenuId=${menu.id})}"><p class="text">See More...</p></a>
+                <a th:href="@{delete/{myMenuId}(myMenuId=${menu.id})}" th:text="Delete">Delete</a>
+                <a th:href ="@{edit/{myMenuId}(myMenuId=${menu.id})}" th:text="Edit">Edit</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
