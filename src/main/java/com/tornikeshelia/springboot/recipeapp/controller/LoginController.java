@@ -25,6 +25,16 @@ public class LoginController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDenied(){
+        return "access-denied";
+    }
+
     @GetMapping("/register")
     public String register(Model model){
         UserRegistration userRegistration = new UserRegistration();
@@ -35,7 +45,7 @@ public class LoginController {
     @PostMapping("/register")
     public String postRegister(@ModelAttribute("user") UserRegistration userRegistrationObject){
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         String encodedPassword = bCryptPasswordEncoder.encode(userRegistrationObject.getPassword());
 
