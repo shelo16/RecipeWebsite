@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Hello Page</title>
 </head>
 <body>
-    <div sec:authorize="isAuthenticated()">
-        <h1>Hello <span sec:authentication="username">User</span></h1>
-    </div>
-    <br>
-    <a th:href="@{/login}">Log in</a>
 
-    <a th:href="@{/register}">Register</a>
+    <div sec:authorize="isAnonymous()">
+        <a th:href="@{/login}">Log in</a>
+        <br>
+        <a th:href="@{/register}">Register</a>
+    </div>
+
     <br>
+
     <a th:href="@{/recipeList}">List Page</a>
 </body>
 </html>
