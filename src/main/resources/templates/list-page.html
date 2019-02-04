@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>List Page</title>
@@ -8,7 +9,17 @@
 <body>
     <a th:href="@{/addNew}">Add New Recipe</a>
 
-    <a th:href="@{/logout}">logout</a>
+    <div sec:authorize="isAnonymous()">
+        <p>Welcome User</p>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <p th:text="${username}">Welcome User</p>
+
+    <form th:action = @{/logout} method="post">
+        <input type="submit" value="Log out"/>
+    </form>
+    </div>
 
     <div th:each="menu : ${menuList}">
         <div class="content">
