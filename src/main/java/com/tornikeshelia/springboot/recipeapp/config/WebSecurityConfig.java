@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                    .antMatchers("/", "/home").permitAll()
                     .antMatchers("/register").permitAll()
                     .antMatchers("/recipeList").permitAll()
                     .antMatchers("/foodDescription/**").permitAll()
@@ -48,12 +49,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/delete/**").hasRole("ADMIN")
                     .antMatchers("/edit/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
-                    .and()
+                .and()
                 .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
                     .permitAll()
                     .and()
                 .logout()
-                    .logoutSuccessUrl("/").permitAll();
+                    .logoutSuccessUrl("/").permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");
         http.csrf().disable();
+        http.authorizeRequests().antMatchers("/resources/**").permitAll().anyRequest().permitAll();
     }
 }
