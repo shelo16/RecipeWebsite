@@ -5,8 +5,11 @@ import com.tornikeshelia.springboot.recipeapp.entity.Menu;
 import com.tornikeshelia.springboot.recipeapp.repository.IngredientRepository;
 import com.tornikeshelia.springboot.recipeapp.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,11 +26,20 @@ public class MyController{
 
     @GetMapping("/")
     private String hello(){
+
         return "hello-page";
     }
 
     @GetMapping("/recipeList")
-    public String listPage(Model model){
+    public String listPage(ModelMap model){
+
+
+
+        Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+        String name = loggedInUser.getName();
+
+        model.addAttribute("username", name);
+
         model.addAttribute("menuList",menuRepository.findAll());
         return "list-page";
     }
