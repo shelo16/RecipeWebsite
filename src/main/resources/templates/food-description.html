@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>List Page</title>
@@ -18,6 +19,26 @@
                     </ul>
             </ul>
         </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <h3 th:text = "Comments"></h3>
+
+    <div sec:authorize="isAuthenticated()">
+        <form th:action = "@{/postComment/{myMenuId}(myMenuId=${menu.id})}" method="POST">
+            <textarea rows="2" cols="100" name="myComment"></textarea>
+            <input type="submit" th:value="Add"/>
+        </form>
+    </div>
+
+    <div class="comment" th:each="com : ${menu.comments}">
+        <h3 th:text = ${com.user.userName}>asd</h3>
+        <ul>
+            <li th:text = "${com.comment}">Comment</li>
+        </ul>
     </div>
 </body>
 </html>
